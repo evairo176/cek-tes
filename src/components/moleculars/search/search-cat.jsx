@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setBreed, setLoading } from "../../../redux/action/glocalAction";
 
-const SearchCat = ({ searchTerm, setSearchTerm }) => {
+const SearchCat = ({ searchTerm, setSearchTerm, page, setPage }) => {
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
@@ -11,10 +11,19 @@ const SearchCat = ({ searchTerm, setSearchTerm }) => {
   const handleSearch = async () => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.get(
-        `https://api.thecatapi.com/v1/breeds/search?q=${searchTerm}`
-      );
-      dispatch(setBreed(response.data));
+      let response;
+      if (searchTerm === "") {
+        setPage(1);
+        response = await axios.get(
+          `https://api.thecatapi.com/v1/breeds?page=1&limit=10`
+        );
+      } else {
+        response = await axios.get(
+          `https://api.thecatapi.com/v1/breeds/search?q=${searchTerm}`
+        );
+      }
+
+      dispatch(setBreed([...response.data]));
       dispatch(setLoading(false));
     } catch (error) {
       setError(error.message);

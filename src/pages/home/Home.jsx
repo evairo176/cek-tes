@@ -43,7 +43,8 @@ function Home() {
 
   const handleScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
-
+    console.log(scrollHeight - scrollTop);
+    console.log(clientHeight);
     if (scrollHeight - scrollTop <= clientHeight) {
       fetchData();
     }
@@ -53,23 +54,15 @@ function Home() {
     <PaddingContainer>
       <div className="pt-10" />
       <div className="flex items-center gap-20 mb-3 border-b-2 py-2">
-        {" "}
-        <button
-          onClick={() => {
-            setPage(1);
-            setRefresh(!refresh);
-          }}
-          className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Refresh
-        </button>
         <SearchCat
           searchTerm={searchTerm}
           breeds={breeds}
           setSearchTerm={setSearchTerm}
+          setPage={setPage}
+          page={page}
         />
       </div>
-      <div className="max-h-[100vh] overflow-auto py-5" onScroll={handleScroll}>
+      <div className="max-h-[600px] overflow-auto py-3" onScroll={handleScroll}>
         <div className="grid grid-cols-1 gap-20 md:grid-cols-3 lg:auto-cols-fr ">
           {breeds.length > 0
             ? breeds.map((breed, key) => (
@@ -124,7 +117,7 @@ function Home() {
                   </div>
                 </div>
               ))
-            : "kosong"}
+            : "Oops, data Not Found"}
         </div>
       </div>
       <div className="pt-10" />

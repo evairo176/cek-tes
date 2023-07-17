@@ -45,7 +45,7 @@ function Home() {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
     console.log(scrollHeight - scrollTop);
     console.log(clientHeight);
-    if (scrollHeight - scrollTop <= clientHeight) {
+    if (scrollHeight - scrollTop - 5 <= clientHeight) {
       fetchData();
     }
   };

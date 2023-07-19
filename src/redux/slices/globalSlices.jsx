@@ -7,6 +7,8 @@ const GlobalSlices = createSlice({
     messaage: "Error",
     isLoading: false,
     breeds: [],
+    post: [],
+    post_detail: "",
   },
   reducers: {
     globalAction: (state, action) => {
@@ -27,6 +29,16 @@ const GlobalSlices = createSlice({
           return {
             ...state,
             breeds: action.payload.value,
+          };
+        case "SET_POST":
+          return {
+            ...state,
+            post: action.payload.value,
+          };
+        case "SET_POST_DETAIL":
+          return {
+            ...state,
+            post_detail: action.payload.value,
           };
         default:
           return;

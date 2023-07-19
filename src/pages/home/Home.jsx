@@ -8,7 +8,7 @@ import SearchCat from "../../components/moleculars/search/search-cat";
 
 function Home() {
   const dispatch = useDispatch();
-  const { isLoading, breeds } = useSelector((store) => store?.global);
+  const { breeds } = useSelector((store) => store?.global);
   const [searchTerm, setSearchTerm] = useState("");
   const [refresh, setRefresh] = useState(false);
 
@@ -19,6 +19,8 @@ function Home() {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
   const toggleExpand = (index) => {
